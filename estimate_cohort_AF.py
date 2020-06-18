@@ -41,7 +41,8 @@ header = '\t'.join(['var_id', 'n_carriers', 'cohort_allele_frequency'])
 outf.write(header + '\n')
 
 carriers = {}
-with gzip.open(input_gvcf, 'r') as f:
+#with gzip.open(input_gvcf, 'r') as f:
+with open(input_gvcf, 'r') as f:
 	for line in f:
 		tmp = line.strip().split('\t')
 		if not line.startswith('##'):
