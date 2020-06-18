@@ -84,6 +84,8 @@ with open(input_gvcf, 'r') as f:
 						
 						for j in range(len(list_alt)):
 							
+							n = 0
+							
 							if not list_alt[j] == '<NON_REF>':
 								
 								if j == 0: # first alt allele
