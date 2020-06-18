@@ -111,7 +111,7 @@ task split_gvcf {
     zgrep "^#" ${gvcf} > header.txt
 
     # sort input vcf and bgzip
-    sort -k1,1V -k2,2n ${gvcf} | bgzip -c > "${gvcf}.gz"
+    bgzip -c ${gvcf} > "${gvcf}.gz"
 
     # tabix index input vcf
     tabix -p vcf "${gvcf}.gz"
