@@ -173,14 +173,14 @@ task gather_shards {
 
     grep "^var_id" "tmp.cat.txt" > "header.txt"
 
-    (cat header.txt; grep -v "^var_id" "tmp.cat.txt") > AC.${outprefix}.txt"
+    (cat header.txt; grep -v "^var_id" "tmp.cat.txt") > "AC.${outprefix}.txt"
 
   >>>
 
   runtime {
     docker: "gatksv/sv-base-mini:cbb1fc"
   }
-  
+
   output {
     File out = "AC.${outprefix}.txt"
   }
