@@ -175,13 +175,15 @@ task gather_shards {
 
   command <<<
 
+    set -eou pipefail
+
     while read file; do
       cat $file >> "tmp.cat.txt"
     done < ${write_lines(shards)};
 
     grep "^var_id" "tmp.cat.txt" | head -n 1 > "header.txt"
 
-    (cat "header.txt"; grep -v "var_id" "tmp.cat.txt") > "AC.${outprefix}.txt"
+    (cat header.txt; grep -v "^var_id" "tmp.cat.txt") > "AC.${outprefix}.txt"
 
   >>>
 
