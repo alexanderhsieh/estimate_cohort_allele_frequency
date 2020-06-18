@@ -96,6 +96,7 @@ with open(input_gvcf, 'r') as f:
 									## write out result
 									if n > 0:
 										carriers[key] = n
+										freq = float(n)/float(cohort_size)
 										outf.write(key + '\t' + str(n) + '\t' + str(freq) + '\n')
 
 								elif j > 0: # 
@@ -109,6 +110,7 @@ with open(input_gvcf, 'r') as f:
 									## write out result
 									if n > 0:
 										carriers[key] = n
+										freq = float(n)/float(cohort_size)
 										outf.write(key + '\t' + str(n) + '\t' + str(freq) + '\n')
 						
 						
