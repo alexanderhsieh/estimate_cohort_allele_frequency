@@ -21,6 +21,7 @@ workflow estimate_cohort_allele_frequency {
   String outprefix
 
   File estimation_script
+  Int cohort_size
 
   parameter_meta {
     gvcfs: "array of files representing single-sample gvcfs"
@@ -52,7 +53,8 @@ workflow estimate_cohort_allele_frequency {
       input:
       script = estimation_script,
       gvcf = split_gvcf.out[idx],
-      shard = "${idx}"
+      shard = "${idx}",
+      cohort_size = cohort_size
     }
 
   }
@@ -147,11 +149,13 @@ task estimate_cohort_AF{
   File gvcf
   String shard
 
+  Int cohort_size
+
   String outprefix = basename(gvcf, '.g.vcf')
   String outfname = "AC.${outprefix}.${shard}.txt"
 
   command <<<
-    python ${script} -i ${gvcf} -o ${outfname}
+    python ${script} -i ${gvcf} -n ${cohort_size} -o ${outfname}
   >>>
 
   runtime {
