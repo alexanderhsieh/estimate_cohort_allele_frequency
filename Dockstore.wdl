@@ -106,6 +106,8 @@ task split_gvcf {
   File gvcf # input gvcf
   String outprefix = basename(gvcf, 'g.vcf.gz')
 
+  Int disk_size = 100 # start with 100G
+
   command <<<
     # pull header lines
     zgrep "^#" ${gvcf} > header.txt
@@ -131,6 +133,8 @@ task split_gvcf {
 
   runtime {
     docker: "gatksv/sv-base-mini:cbb1fc"
+    disks: "local-disk " + disk_size + " HDD"
+    bootDiskSizeGb: disk_size
   }
 
 }
